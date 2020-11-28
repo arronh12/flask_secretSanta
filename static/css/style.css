@@ -1,0 +1,28 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+    background-image: url(../img/xmas_bk.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.index-main h1{
+    color: #D6001C;
+    font-family: 'Arizonia', fantasy;font-size: 8em;
+    text-shadow: 2px 2px #000;
+}
+
+#intro-card{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+#make-game-content{
+    background-color: white;
+}
+
+.custom_button{
+    margin: 5% auto;
+}

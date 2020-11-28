@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Game Results</title>
+</head>
+<body>
+<div class="container bg-light w-75 mt-5 pb-3">
+    <h1 class="text-center">Results</h1>
+    <div class="row m-3 text-center border-top border-bottom p-2">
+        <div class="col">Location: {{ game['loc'] }}</div>
+        <div class="col">Date of Party: {{ game['date'] }}</div>
+        <div class="col">Spending Limit: {{ game['amount'] }}</div>
+    </div>
+    <h2 class="mt-5 mb-5" style="text-align: center">Secret Santa Match-up</h2>
+    <div class="row text-center">
+        <div class=col><h3>Giver</h3></div>
+        <div class=col><h3>Receiver</h3></div>
+    </div>
+    <ul class="list-group list-group-flush text-center mt-3 mb-5">
+    {% for n in names %}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col"><p>{{ n['name1'] }}</p></div>
+                <div class="col"><p>{{ n['name2'] }}</p></div>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="container bg-light w-75 mt-5 pb-3 text-center">
+    <h2 class="pt-3">Mailing List</h2>
+    <ul class="list-group list-group-flush text-center mt-3 mb-5">
+    {% for e in email %}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col"><p>{{ e }}</p></div>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+<!-- Footer -->
+<footer class="page-footer container font-small pt-4 w-75 text-center">
+    <ul class="list-group list-group-horizontal-lg" style="display: inline">
+        <li class="list-group-item"><a href="{{ url_for("game_clear") }}">Clear game</a></li>
+        <li class="list-group-item"><a href="{{ url_for("home") }}">Return Home</a></li>
+    </ul>
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

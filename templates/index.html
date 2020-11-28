@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Secret Santa</title>
+</head>
+<body>
+    <div class="container index-main">
+        <div class="row">
+            <div class="col">
+                <h1>Welcome to secret santa.</h1>
+            </div>
+            <div class="col">
+                <div class="card" id="intro-card" style="margin-bottom: 3em">
+                    <div class="card-header"><h2>What is secret santa</h2></div>
+                    <div class="card-body"><p>Secret Santa is a Western Christmas tradition in which members of a group
+                        or community are randomly assigned a person to whom they give a gift. The identity of the gift
+                        giver is to remain a secret and should not be revealed.</p>
+
+                        <h3>how to play</h3>
+                        <p>Add peoples names to the list. Yu can remove or move around names. when your happy you have everyone added click go.
+                        the app will assign each person a secret santa. you can also add special instructions to each player. have fun!</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col"><p>Ready to play?</p></div>
+                            <div class="col"><a class="btn btn-danger" href="#make-game-content">Get Started</a></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="make-game-content">
+            <form method="post" action="#" class="form-control" name="party_start">
+                <div class="row" style="margin-top: 5%; padding: 5px">
+                    <div class="col">
+                        <label for="gameDateInput" style="text-align: center">Date of your secret santa party.</label>
+                        <input type="date" class="form-control" name="gameDateInput" placeholder="Input Date" required>
+                    </div>
+                    <div class="col">
+                        <label for="gameLocationInput">Location of your secret santa party.</label>
+                        <input type="text" class="form-control" name="gameLocationInput" placeholder="Input party location" required>
+                    </div>
+                    <div class="col">
+                        <label for="gameAmountInput">Amount to spend.</label>
+                        <input type="number" class="form-control" name="gameAmountInput" placeholder="Input amount" required>
+                        <button class="btn btn-danger custom_button" onclick="{{ session['form_choice']=="make_party" }}" type="submit">Create Party</button>
+                    </div>
+                </div>
+            </form>
+
+                {% if gameStuff %}
+                    <div class="row">
+                        <h2 style="margin: 2% auto">Add your players</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h3>Party date: {{ gameStuff['date'] }}</h3>
+                        </div>
+                        <div class="col">
+                            <h3>Party location: {{ gameStuff['loc'] }}</h3>
+                        </div>
+                        <div class="col">
+                            <h3>Gift amount: {{ gameStuff['amount'] }}</h3>
+                        </div>
+                    </div>
+                        <form method="post" class="form-control" action="{{ url_for("player") }}" name="player-add">
+                            <div class="row" style="margin: 5% auto; width: 100%;">
+                                <div class="col">
+                                    <input type="email" class="form-control" name="playerEmail" placeholder="Enter player Email.">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" name="playerName" placeholder="Enter player name.">
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-danger" type="submit">Add Player</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        {% if session['player_list'] %}
+                           <div class="container w-75" style="margin-bottom: 10%; margin-top: 5%; padding-bottom: 10%">
+                             <table class="table table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Player Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for p in session['player_list'] %}
+                                        <tr>
+                                            <td>{{ p.name }}</td>
+                                            <td>{{ p.email }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                             </table>
+                           <form action="{{ url_for('game_results') }}" method="post">
+                               <button type="submit" class="btn btn-danger w-100" >Finish</button>
+                           </form>
+                           </div>
+                        {% endif %}
+                {% endif %}
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
